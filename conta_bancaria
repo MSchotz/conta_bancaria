@@ -1,9 +1,5 @@
-# Início do programa
-
-# Solicita o nome do titular
 nome = input("Digite o nome do titular da conta: ")
 
-# Solicita o valor do depósito inicial com validação
 while True:
     valor_input = input("Digite o valor do depósito inicial: R$ ").replace(',', '.')
     if valor_input.replace('.', '', 1).isdigit():
@@ -15,14 +11,12 @@ while True:
     else:
         print("Entrada inválida. Digite um número válido.")
 
-# Criação da conta
-titular = (nome,)  # Tupla com nome
-saldo = [deposito_inicial]  # Lista com saldo
-historico = [f"Depósito inicial: R$ {deposito_inicial:.2f}"]  # Lista com histórico
+titular = (nome,)
+saldo = [deposito_inicial] 
+historico = [f"Depósito inicial: R$ {deposito_inicial:.2f}"]
 
 print(f"\nConta criada com sucesso para {nome} com saldo de R$ {deposito_inicial:.2f}.\n")
 
-# Loop do menu
 while True:
     print("\nEscolha uma opção:")
     print("1 - Depositar")

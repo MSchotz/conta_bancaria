@@ -1,0 +1,78 @@
+# Início do programa
+
+# Solicita o nome do titular
+nome = input("Digite o nome do titular da conta: ")
+
+# Solicita o valor do depósito inicial com validação
+while True:
+    valor_input = input("Digite o valor do depósito inicial: R$ ").replace(',', '.')
+    if valor_input.replace('.', '', 1).isdigit():
+        deposito_inicial = float(valor_input)
+        if deposito_inicial >= 0:
+            break
+        else:
+            print("O valor deve ser positivo.")
+    else:
+        print("Entrada inválida. Digite um número válido.")
+
+# Criação da conta
+titular = (nome,)  # Tupla com nome
+saldo = [deposito_inicial]  # Lista com saldo
+historico = [f"Depósito inicial: R$ {deposito_inicial:.2f}"]  # Lista com histórico
+
+print(f"\nConta criada com sucesso para {nome} com saldo de R$ {deposito_inicial:.2f}.\n")
+
+# Loop do menu
+while True:
+    print("\nEscolha uma opção:")
+    print("1 - Depositar")
+    print("2 - Sacar")
+    print("3 - Consultar saldo")
+    print("4 - Consultar histórico")
+    print("5 - Sair")
+
+    opcao = input("Opção: ")
+
+    if opcao == '1':
+        valor_input = input("Digite o valor a depositar: R$ ").replace(',', '.')
+        if valor_input.replace('.', '', 1).isdigit():
+            valor = float(valor_input)
+            if valor > 0:
+                saldo[0] += valor
+                historico.append(f"Depósito: R$ {valor:.2f}")
+                print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
+            else:
+                print("O valor do depósito deve ser positivo.")
+        else:
+            print("Entrada inválida. Digite um número válido.")
+
+    elif opcao == '2':
+        valor_input = input("Digite o valor a sacar: R$ ").replace(',', '.')
+        if valor_input.replace('.', '', 1).isdigit():
+            valor = float(valor_input)
+            if valor > 0:
+                if valor <= saldo[0]:
+                    saldo[0] -= valor
+                    historico.append(f"Saque: R$ {valor:.2f}")
+                    print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
+                else:
+                    print("Saldo insuficiente para realizar o saque.")
+            else:
+                print("O valor do saque deve ser positivo.")
+        else:
+            print("Entrada inválida. Digite um número válido.")
+
+    elif opcao == '3':
+        print(f"Saldo atual: R$ {saldo[0]:.2f}")
+
+    elif opcao == '4':
+        print("\nHistórico de transações:")
+        for transacao in historico:
+            print(f"- {transacao}")
+
+    elif opcao == '5':
+        print(f"\nObrigado por utilizar nosso sistema, {titular[0]}!")
+        break
+
+    else:
+        print("Opção inválida. Por favor, escolha uma opção do menu.")
